@@ -1,7 +1,6 @@
-# README
-Atomic Warriors
+# Atomic Warriors
 
-###Background and Overview
+### Background and Overview
 My goal in creating this project is to create modern slice of my favorite parts of 80s and 90s arcade games. The game will be have a straightforward appearance and controls, making it easy to pick up. My goal is to make the game polished enough that there is a wide range of options created by the few controls. There will be two characters, one player controlled and the other controlled by an AI. Each character can walk forwards, backwards and can jump. Each player has a shield that can be held in three positions, top, middle, and low. A player wins by hitting the other player with their shield in an area not protected by a shield, or by jumping on their head. If a shield contacts the other player's shield, the characters bounce a short distance apart. Characters can also throw their shield, winning if it hits their opponent in an unprotected area. If a player throws a shield and it is blocked, they will need to wait until their shield regenerates (set amount of time). First player to win three rounds wins the game.
 
 ### Functionality and MVP Features
