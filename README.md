@@ -24,11 +24,10 @@ My goal in creating this project is to create modern slice of my favorite parts 
 * Tuesday - Skeleton of character movement is completed
 * Wednesday - Characters are able to eliminate one another, shields can be thrown and regenerate appropriately, and the system for winning a match is fully implemented
 * Thursday - Stage design complete
-* Friday - Second player added, refine styling of stages and characters
+* Friday - Second player added and AI added, refine styling of stages and characters
 
 ### Bonus Goals
 * Scrolling backstory loop while game is waiting for match to start
-* AI opponent
 * More stages
 * Music and sound effects
 * Choice of character color
