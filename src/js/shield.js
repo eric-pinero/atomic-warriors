@@ -1,24 +1,17 @@
-import Warrior from "./warrior";
 class Shield{
-    constructor(props){
-        // super();
+    constructor(warriorPos){
         this.height = 40;
         this.width = 10;
-
+        this.warriorPos = warriorPos;
         this.shieldStance = "middle";
         this.pos = [0,0];
         this.color = "ffff00";
         this.dx = 0;
+        this.dy = 0;
     }
 
     move(command){
         switch (command) {
-            case "left":
-                    this.dx -= 5;
-                break;
-            case "right":
-                    this.dx += 5;
-                break;
             case "up":
                 if (this.shieldStance === "low"){
                     this.shieldStance = "middle";
@@ -40,37 +33,51 @@ class Shield{
     }
 
     update(){
+        if (this.pos[1] + this.dy > 460){
+            this.dy = 0;
+        } else {
+            this.dy += 1;
+        }
+        
+        if (this.pos[0] + this.dx < 99 || this.pos[0] + this.dx > 900){
+            this.dx = 0;
+        }else if (this.dx > 5){
+            this.dx = 5;
+        }else if (this.dx < -5){
+            this.dx = -5;
+        }
+
 
         switch (this.shieldStance) {
             case "middle":
-                this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1]];
-                this.shieldHeight = 40;
-                this.shieldWidth = 10;
+                this.pos = [this.warriorPos[0] + 50, this.warriorPos[1]];
+                this.height = 40;
+                this.width = 10;
                 break;
         
             case "low":
-                this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1] + 40];
-                this.shieldHeight = 40;
-                this.shieldWidth = 10;
+                this.pos = [this.warriorPos[0] + 50, this.warriorPos[1] + 40];
+                this.height = 40;
+                this.width = 10;
                 break;
         
             case "top":
-                this.shieldPos = [this.warriorPos[0], this.warriorPos[1] - 25];
-                this.shieldHeight = 10;
-                this.shieldWidth = 40;
+                this.pos = [this.warriorPos[0], this.warriorPos[1] - 25];
+                this.height = 10;
+                this.width = 40;
                 break;
         
             default:
                 break;
         }
 
-        this.shieldPos[1] += this.dy;
-        this.shieldPos[0] += this.dx;
+        this.pos[1] += this.dy;
+        this.pos[0] += this.dx;
     }
 
     draw(ctx) {
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.shieldPos[0], this.shieldPos[1], this.shieldWidth, this.shieldHeight);
+        ctx.fillRect(this.pos[0], this.pos[1], this.width, this.height);
     }
     
     //   isCollidedWith(otherObject) {

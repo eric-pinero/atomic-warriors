@@ -2,15 +2,22 @@ class GameView {
     constructor(game, ctx) {
       this.ctx = ctx;
       this.game = game;
-      this.warrior = this.game.addWarrior();
+      this.warrior1 = this.game.addWarrior([100,70], "#ff00ff");
+      this.warrior2 = this.game.addWarrior([400,70], "#ffff00");
     }
   
     bindKeyHandlers() {
-      const warrior = this.warrior;
+      const warrior1 = this.warrior1;
+      const warrior2 = this.warrior2;
   
-      Object.keys(GameView.MOVES).forEach((k) => {
-        const command = GameView.MOVES[k];
-        key(k, () => { warrior.move(command); });
+      Object.keys(GameView.MOVES1).forEach((k) => {
+        const command1 = GameView.MOVES1[k];
+        key(k, () => { warrior1.move(command1); });
+      });
+
+      Object.keys(GameView.MOVES2).forEach((k) => {
+        const command2 = GameView.MOVES2[k];
+        key(k, () => { warrior2.move(command2); });
       });
   
     }
@@ -34,12 +41,19 @@ class GameView {
     }
   }
   
-  GameView.MOVES = {
+  GameView.MOVES1 = {
     w: "up",
     a: "left",
     s: "down",
     d: "right",
-    f: "jump",
+    z: "jump",
+  };
+  GameView.MOVES2 = {
+    i: "up",
+    j: "left",
+    k: "down",
+    l: "right",
+    b: "jump",
   };
   
   

@@ -13,9 +13,10 @@ class Game {
   }
 
 
-  addWarrior() {
+  addWarrior(pos, color) {
     const warrior = new Warrior({
-      pos: [100,70],
+      pos: pos,
+      color: color,
     });
 
     this.add(warrior);

@@ -1,6 +1,5 @@
-import Shield from "./shield";
 class Warrior{
-    constructor(props){
+    constructor(options){
         this.height = 80;
         this.width = 40;
 
@@ -8,12 +7,11 @@ class Warrior{
         this.shieldWidth = this.width / 4;
         this.shieldStance = "middle";
         this.shieldPos = "middle";
-        this.warriorPos = props.pos;
-        this.color = "#00ff00";
+        this.warriorPos = options.pos;
+        this.color = options.color;
         this.shieldColor = "ffff00";
         this.dy = 0;
         this.dx = 0;
-        new Shield();
     }
 
     move(command){
@@ -72,6 +70,7 @@ class Warrior{
             this.dx = -5;
         }
 
+        debugger
         switch (this.shieldStance) {
             case "middle":
                 this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1]];
@@ -119,4 +118,4 @@ Warrior.pos = [20, 20];
 Warrior.color = "00ff00";
 Warrior.height = 20;
 Warrior.width = 10;
-export default Warrior;
+module.exports = Warrior;
