@@ -1,3 +1,4 @@
+import { randomIntFromRange, randomColor, distance } from "./utils";
 class Warrior{
     constructor(options){
         this.height = 80;
@@ -6,12 +7,14 @@ class Warrior{
         this.shieldHeight = this.height / 2;
         this.shieldWidth = this.width / 4;
         this.shieldStance = "middle";
-        this.shieldPos = "middle";
         this.warriorPos = options.pos;
+        this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1]];
         this.color = options.color;
-        this.shieldColor = "ffff00";
+        this.shieldColor = options.shieldColor;
+        this.warriorFacing = options.facing;
         this.dy = 0;
         this.dx = 0;
+        this.destroyed = false;
     }
 
     move(command){
@@ -70,16 +73,29 @@ class Warrior{
             this.dx = -5;
         }
 
-        debugger
+        if (this.dx < 0){
+            this.facing = "left";
+        } else if (this.dx > 0){
+            this.facing = "right";
+        }
+        
         switch (this.shieldStance) {
             case "middle":
-                this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1]];
+                if (this.facing === "right"){
+                    this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1]];
+                } else {
+                    this.shieldPos = [this.warriorPos[0] - 25, this.warriorPos[1]]; 
+                }
                 this.shieldHeight = 40;
                 this.shieldWidth = 10;
                 break;
         
             case "low":
-                this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1] + 40];
+                if (this.facing === "right"){
+                    this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1] + 40];
+                } else {
+                    this.shieldPos = [this.warriorPos[0] - 25, this.warriorPos[1] + 40]; 
+                }
                 this.shieldHeight = 40;
                 this.shieldWidth = 10;
                 break;
@@ -93,6 +109,8 @@ class Warrior{
             default:
                 break;
         }
+
+
 
         this.warriorPos[1] += this.dy;
         this.warriorPos[0] += this.dx;
@@ -108,9 +126,127 @@ class Warrior{
         ctx.fillRect(this.shieldPos[0], this.shieldPos[1], this.shieldWidth, this.shieldHeight);
     }
     
-    //   isCollidedWith(otherObject) {
-    //     const centerDist = Util.dist(this.pos, otherObject.pos);
-    //     return centerDist < (this.radius + otherObject.radius);
+    isCollidedWith(otherObject) {
+        // const wtoSDist = distance(
+        //     this.warriorPos[0], 
+        //     this.warriorPos[1], 
+        //     otherObject.shieldPos[0], 
+        //     otherObject.shieldPos[1]
+        // );
+        // const wtoWDist = distance(
+        //     this.warriorPos[0], 
+        //     this.warriorPos[1], 
+        //     otherObject.warriorPos[0], 
+        //     otherObject.warriorPos[1])
+        // ;
+        // const stoSDist = distance(
+        //     this.shieldPos[0], 
+        //     this.shieldPos[1], 
+        //     otherObject.shieldPos[0], 
+        //     otherObject.shieldPos[1]
+        // );
+
+
+        const warriorHitbox = {
+            x: this.warriorPos[0],
+            y: this.warriorPos[1],
+            width: this.width,
+            height: this.height,
+        };
+
+        const shieldHitbox = {
+            x: this.shieldPos[0],
+            y: this.shieldPos[1],
+            width: this.shieldWidth,
+            height: this.shieldHeight,
+        };
+
+        const otherWarriorHitbox ={
+            x: otherObject.warriorPos[0],
+            y: otherObject.warriorPos[1],
+            width: otherObject.width,
+            height: otherObject.height,
+        };
+
+        const otherShieldHitbox ={
+            x: otherObject.shieldPos[0],
+            y: otherObject.shieldPos[1],
+            width: otherObject.shieldWidth,
+            height: otherObject.shieldHeight,
+        };
+
+
+        const shieldClash =
+            (shieldHitbox.x < otherShieldHitbox.x + otherShieldHitbox.width &&
+            shieldHitbox.x + shieldHitbox.width > otherShieldHitbox.x &&
+            shieldHitbox.y < otherShieldHitbox.y + otherShieldHitbox.height &&
+            shieldHitbox.y + shieldHitbox.height > otherShieldHitbox.y)
+        ;
+
+        const hitwithShield = 
+            (warriorHitbox.x < otherShieldHitbox.x + otherShieldHitbox.width &&
+            warriorHitbox.x + warriorHitbox.width > otherShieldHitbox.x &&
+            warriorHitbox.y < otherShieldHitbox.y + otherShieldHitbox.height &&
+            warriorHitbox.y + warriorHitbox.height > otherShieldHitbox.y)
+        ;
+
+        const hitbyShield =
+        (warriorHitbox.x > otherShieldHitbox.x + otherShieldHitbox.width &&
+            warriorHitbox.x + warriorHitbox.width < otherShieldHitbox.x &&
+            warriorHitbox.y > otherShieldHitbox.y + otherShieldHitbox.height &&
+            warriorHitbox.y + warriorHitbox.height < otherShieldHitbox.y)
+        ;
+        const warriorClash = 
+            (warriorHitbox.x < otherWarriorHitbox.x + otherWarriorHitbox.width &&
+            warriorHitbox.x + warriorHitbox.width > otherWarriorHitbox.x &&
+            warriorHitbox.y < otherWarriorHitbox.y + otherWarriorHitbox.height &&
+            warriorHitbox.y + warriorHitbox.height > otherWarriorHitbox.y)
+        ;
+
+        
+        debugger
+        switch (true) {
+            case shieldClash:
+                return "shieldClash";
+            case hitwithShield :
+                return "hitwithShield";
+            case hitbyShield :
+                return "hitbyShield";
+            case warriorClash:
+                return "warriorClash";
+            default:
+                return null;
+        }
+
+    }
+
+    collideWith(otherObject, collisionType) {
+        if (!otherObject.destroyed && !this.destroyed){
+            switch (true) {
+                case collisionType === "shieldClash":
+                    this.dx = -this.dx;
+                    // otherObject.dx = -otherObject.dx;
+                    this.dy = -this.dy;
+                    // otherObject.dy = -otherObject.dy;
+                    break;
+                case collisionType === "hitwithShield":
+                    otherObject.destroyWarrior();
+                    break;
+                case collisionType === "hitbyShield":
+                    this.destroyWarrior();
+                    break;
+                case collisionType === "warriorClash" && this.dy > 0:
+                    otherObject.destroyWarrior();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    destroyWarrior(){
+        this.destroyed = true;
+    }
 }    
 
 
@@ -118,4 +254,4 @@ Warrior.pos = [20, 20];
 Warrior.color = "00ff00";
 Warrior.height = 20;
 Warrior.width = 10;
-module.exports = Warrior;
+export default Warrior;

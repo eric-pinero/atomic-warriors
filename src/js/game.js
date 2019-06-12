@@ -13,10 +13,12 @@ class Game {
   }
 
 
-  addWarrior(pos, color) {
+  addWarrior(pos, color, shieldColor, facing) {
     const warrior = new Warrior({
       pos: pos,
       color: color,
+      shieldColor: shieldColor,
+      facing: facing,
     });
 
     this.add(warrior);
@@ -28,30 +30,35 @@ class Game {
     return [].concat(this.warriors);
   }
 
-//   checkCollisions() {
-//     const allObjects = this.allObjects();
-//     for (let i = 0; i < allObjects.length; i++) {
-//       for (let j = 0; j < allObjects.length; j++) {
-//         const obj1 = allObjects[i];
-//         const obj2 = allObjects[j];
+  checkCollisions() {
+    const allObjects = this.allObjects();
+    for (let i = 0; i < allObjects.length; i++) {
+      for (let j = 0; j < allObjects.length; j++) {
+        const obj1 = allObjects[i];
+        const obj2 = allObjects[j];
 
-//         if (obj1.isCollidedWith(obj2)) {
-//           const collision = obj1.collideWith(obj2);
-//           if (collision) return;
-//         }
-//       }
-//     }
-//   }
+        if (obj1.isCollidedWith(obj2) && obj1 !== obj2) {
+          const collisionType = obj1.isCollidedWith(obj2);
+          const collision = obj1.collideWith(obj2, collisionType);
+          if (collision) return;
+        }
+      }
+    }
+  }
 
   draw(ctx) {
     ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
     ctx.fillStyle = Game.BG_COLOR;
     ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
 
+    
     this.allObjects().forEach((object) => {
-      object.update();
-      object.draw(ctx);
+        if (!object.destroyed){
+            object.update();
+            object.draw(ctx);
+        }
     });
+    this.checkCollisions();
   }
 
   isOutOfBounds(pos) {
@@ -71,12 +78,6 @@ class Game {
       Game.DIM_Y * Math.random()
     ];
   }
-
-
-//   step(delta) {
-//     this.moveObjects(delta);
-//     this.checkCollisions();
-//   }
 
 }
 

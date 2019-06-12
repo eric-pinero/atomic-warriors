@@ -2,8 +2,8 @@ class GameView {
     constructor(game, ctx) {
       this.ctx = ctx;
       this.game = game;
-      this.warrior1 = this.game.addWarrior([100,70], "#ff00ff");
-      this.warrior2 = this.game.addWarrior([400,70], "#ffff00");
+      this.warrior1 = this.game.addWarrior([100,70], "#ff00ff", "#00ff00", "right");
+      this.warrior2 = this.game.addWarrior([400,70], "#ffff00", "#00ff00", "left");
     }
   
     bindKeyHandlers() {
