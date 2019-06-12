@@ -20,10 +20,10 @@ class Warrior{
 
         switch (command) {
             case "left":
-                    this.dx -= 5;
+                    this.dx -= 3;
                 break;
             case "right":
-                    this.dx += 5;
+                    this.dx += 3;
                 break;
             case "jump":
                 if (this.warriorPos[1] === 461)
@@ -66,10 +66,10 @@ class Warrior{
         
         if (this.warriorPos[0] + this.dx < 99 || this.warriorPos[0] + this.dx > 900){
             this.dx = 0;
-        }else if (this.dx > 5){
-            this.dx = 5;
-        }else if (this.dx < -5){
-            this.dx = -5;
+        }else if (this.dx > 9){
+            this.dx = 9;
+        }else if (this.dx < -9){
+            this.dx = -9;
         }
 
         if (this.dx < 0){
@@ -215,6 +215,8 @@ class Warrior{
                 case collisionType === "warriorClash" && this.dy > 0:
                     otherObject.destroyWarrior();
                     break;
+                case collisionType === "warriorClash":
+                    this.dx = 0;
                 default:
                     break;
             }
