@@ -1,8 +1,7 @@
 import Warrior from "./warrior";
-class Shield extends Warrior {
+class Shield{
     constructor(props){
-        debugger
-        super(props);
+        // super();
         this.height = 40;
         this.width = 10;
 
@@ -10,7 +9,6 @@ class Shield extends Warrior {
         this.pos = [0,0];
         this.color = "ffff00";
         this.dx = 0;
-        debugger
     }
 
     move(command){

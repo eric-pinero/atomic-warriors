@@ -72,7 +72,6 @@ class Warrior{
             this.dx = -5;
         }
 
-        debugger
         switch (this.shieldStance) {
             case "middle":
                 this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1]];
