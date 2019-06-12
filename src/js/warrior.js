@@ -1,4 +1,3 @@
-import { randomIntFromRange, randomColor, distance } from "./utils";
 class Warrior{
     constructor(options){
         this.height = 80;
@@ -127,26 +126,6 @@ class Warrior{
     }
     
     isCollidedWith(otherObject) {
-        // const wtoSDist = distance(
-        //     this.warriorPos[0], 
-        //     this.warriorPos[1], 
-        //     otherObject.shieldPos[0], 
-        //     otherObject.shieldPos[1]
-        // );
-        // const wtoWDist = distance(
-        //     this.warriorPos[0], 
-        //     this.warriorPos[1], 
-        //     otherObject.warriorPos[0], 
-        //     otherObject.warriorPos[1])
-        // ;
-        // const stoSDist = distance(
-        //     this.shieldPos[0], 
-        //     this.shieldPos[1], 
-        //     otherObject.shieldPos[0], 
-        //     otherObject.shieldPos[1]
-        // );
-
-
         const warriorHitbox = {
             x: this.warriorPos[0],
             y: this.warriorPos[1],
@@ -203,8 +182,6 @@ class Warrior{
             warriorHitbox.y + warriorHitbox.height > otherWarriorHitbox.y)
         ;
 
-        
-        debugger
         switch (true) {
             case shieldClash:
                 return "shieldClash";
@@ -230,10 +207,10 @@ class Warrior{
                     // otherObject.dy = -otherObject.dy;
                     break;
                 case collisionType === "hitwithShield":
-                    otherObject.destroyWarrior();
+                    this.destroyWarrior();
                     break;
                 case collisionType === "hitbyShield":
-                    this.destroyWarrior();
+                    otherObject.destroyWarrior();
                     break;
                 case collisionType === "warriorClash" && this.dy > 0:
                     otherObject.destroyWarrior();
