@@ -1,6 +1,8 @@
 import Warrior from "./warrior";
+
 class Game {
-  constructor() {
+  constructor(match) {
+    this.match = match;
     this.warriors = [];
   }
 
@@ -13,12 +15,13 @@ class Game {
   }
 
 
-  addWarrior(pos, color, shieldColor, facing) {
+  addWarrior(pos, color, shieldColor, facing, player) {
     const warrior = new Warrior({
       pos: pos,
       color: color,
       shieldColor: shieldColor,
       facing: facing,
+      player: player,
     });
 
     this.add(warrior);
@@ -41,7 +44,11 @@ class Game {
           const collisionType = obj1.isCollidedWith(obj2);
           const collision = obj1.collideWith(obj2, collisionType);
           if (collision) return;
-        }
+        } else if (obj2.isCollidedWith(obj1) && obj2 !== obj1){
+            const collisionType = obj2.isCollidedWith(obj1);
+            const collision = obj2.collideWith(obj1, collisionType);
+            if (collision) return;
+          }
       }
     }
   }
@@ -53,13 +60,14 @@ class Game {
 
     
     this.allObjects().forEach((object) => {
+        object.update();
         if (!object.destroyed){
-            object.update();
             object.draw(ctx);
-        }
+        } 
     });
     this.checkCollisions();
   }
+
 
   isOutOfBounds(pos) {
     return (pos[0] < 0) || (pos[1] < 0) ||
