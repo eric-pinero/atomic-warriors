@@ -7,5 +7,7 @@
 #ignore the bundle and node modules
 node_modules/
 
+
 #ignore linter files
 .jshintrc
+.ds_store

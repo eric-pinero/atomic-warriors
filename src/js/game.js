@@ -4,6 +4,7 @@ class Game {
   constructor(match) {
     this.match = match;
     this.warriors = [];
+    this.endGame = false;
   }
 
   add(object) {
@@ -34,40 +35,55 @@ class Game {
   }
 
   checkCollisions() {
-    const allObjects = this.allObjects();
-    for (let i = 0; i < allObjects.length; i++) {
-      for (let j = 0; j < allObjects.length; j++) {
-        const obj1 = allObjects[i];
-        const obj2 = allObjects[j];
+        const war1 = this.warriors[0];
+        const war2 = this.warriors[1];
 
-        if (obj1.isCollidedWith(obj2) && obj1 !== obj2) {
-          const collisionType = obj1.isCollidedWith(obj2);
-          const collision = obj1.collideWith(obj2, collisionType);
-          if (collision) return;
-        } else if (obj2.isCollidedWith(obj1) && obj2 !== obj1){
-            const collisionType = obj2.isCollidedWith(obj1);
-            const collision = obj2.collideWith(obj1, collisionType);
-            if (collision) return;
-          }
-      }
+
+        if (war1.isCollidedWith(war2)) {
+            const collisionType = war1.isCollidedWith(war2);
+            war1.collideWith(war2, collisionType);
+            war2.collideWith(war1, collisionType);
+        } else if (war2.isCollidedWith(war1)){
+            const collisionType = war2.isCollidedWith(war1);
+            war2.collideWith(war1, collisionType);
+        }
     }
-  }
 
   draw(ctx) {
     ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
     ctx.fillStyle = Game.BG_COLOR;
     ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
 
-    
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "30px Arial";
+    ctx.fillText(`Player 1: ${this.match.score[0]}`, 10, 50);
+    ctx.fillText(`Player 2: ${this.match.score[1]}`, 10, 85);
+
+    this.checkCollisions();
     this.allObjects().forEach((object) => {
         object.update();
         if (!object.destroyed){
             object.draw(ctx);
         } 
     });
-    this.checkCollisions();
+    if (!this.endGame) this.checkWinner();
   }
 
+  checkWinner(){
+      for (let i = 0; i < this.warriors.length; i++) {
+          const warrior = this.warriors[i];
+
+          if (warrior.winner){
+              this.endGame = true;
+              this.gameOver(warrior.player);
+          }
+      }
+  }
+
+  gameOver(player){
+      debugger
+    this.match.addScore(player);
+  }
 
   isOutOfBounds(pos) {
     return (pos[0] < 0) || (pos[1] < 0) ||

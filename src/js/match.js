@@ -6,9 +6,9 @@ class Match{
         this.score = [0, 0];
     }
 
-    addScore(idx){
-        this.score[idx]++;
-        // this.start();
+    addScore(player){
+        this.score[player - 1]++;
+        this.start();
     }
 
     start(){

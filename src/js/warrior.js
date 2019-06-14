@@ -94,9 +94,9 @@ class Warrior{
         switch (this.shieldStance) {
             case "middle":
                 if (this.facing === "right"){
-                    this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1]];
+                    this.shieldPos = [this.warriorPos[0] + 50 + this.dx * 3, this.warriorPos[1]];
                 } else {
-                    this.shieldPos = [this.warriorPos[0] - 25, this.warriorPos[1]]; 
+                    this.shieldPos = [this.warriorPos[0] - 25 + (this.dx * 3), this.warriorPos[1]]; 
                 }
                 this.shieldHeight = 40;
                 this.shieldWidth = 10;
@@ -104,9 +104,9 @@ class Warrior{
         
             case "low":
                 if (this.facing === "right"){
-                    this.shieldPos = [this.warriorPos[0] + 50, this.warriorPos[1] + 40];
+                    this.shieldPos = [this.warriorPos[0] + 50 + this.dx * 3, this.warriorPos[1] + 40];
                 } else {
-                    this.shieldPos = [this.warriorPos[0] - 25, this.warriorPos[1] + 40]; 
+                    this.shieldPos = [this.warriorPos[0] - 25 + (this.dx * 3), this.warriorPos[1] + 40]; 
                 }
                 this.shieldHeight = 40;
                 this.shieldWidth = 10;
@@ -137,14 +137,10 @@ class Warrior{
         ctx.shadowOffsetY = 0;
         ctx.fillRect(this.warriorPos[0], this.warriorPos[1], this.width, this.height);
         ctx.fillStyle = this.shieldColor;
-        ctx.fillRect(this.shieldPos[0] + this.dx, this.shieldPos[1], this.shieldWidth, this.shieldHeight);
+        ctx.fillRect(this.shieldPos[0], this.shieldPos[1], this.shieldWidth, this.shieldHeight);
     }
     
     isCollidedWith(otherObject) {
-        if (otherObject.destroyed){
-            this.winner = true;
-        }
-
         const warriorHitbox = {
             x: this.warriorPos[0],
             y: this.warriorPos[1],
@@ -257,14 +253,15 @@ class Warrior{
                 //     otherObject.destroyWarrior();
                 //     break;
                 case collisionType === "hitwithShield":
-                    debugger
                     this.destroyWarrior();
+                    otherObject.winner = true;
                     break;
                 // case collisionType === "hitbyShield":
                 //     otherObject.destroyWarrior();
                 //     break;
                 case collisionType === "warriorClash" && this.dy > 0:
                     otherObject.destroyWarrior();
+                    this.winner = true;
                     break;
                 case collisionType === "warriorClash":
                     this.dx = 0;
