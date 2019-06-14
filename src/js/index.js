@@ -18,6 +18,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   ctx.fillText("Welcome to Atomic Warriors", 500, 100);
   ctx.fillText("Press Enter to Start", 500, 200);
-  debugger
   key("return", () =>  new Match(bgMusic).start());
 });

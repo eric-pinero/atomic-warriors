@@ -10,10 +10,9 @@ class Match{
         this.matchWinner = "";
         this.bgMusic = bgMusic;
         this.bgMusic.addEventListener("canplaythrough", () => {
-            // debugger
             this.bgMusic.play();
         });
-        // this.deathSound = new Sound("./assets/deathSound.mp3");
+        this.deathSound = new Sound("./assets/deathSound.mp3");
     }
 
     addScore(warrior){
