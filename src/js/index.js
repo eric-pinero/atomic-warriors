@@ -1,13 +1,23 @@
-import Game from "./game";
-import GameView from "./game_view";
 import Match from "./match";
 document.addEventListener("DOMContentLoaded", () => {
-  // const canvasEl = document.getElementsByTagName("canvas")[0];
-  // canvasEl.width = Game.DIM_X;
-  // canvasEl.height = Game.DIM_Y;
 
-  // const ctx = canvasEl.getContext("2d");
-  // const game = new Game();
-  // new GameView(game, ctx).start();
-  new Match().start();
+  const bgMusic = new Audio("./assets/bgMusic.mp3");
+
+  const canvasEl = document.getElementsByTagName("canvas")[0];
+  canvasEl.width = 1000;
+  canvasEl.height = 600;
+  const ctx = canvasEl.getContext("2d");
+  
+  ctx.clearRect(0, 0, 1000, 600);
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(0, 0, 1000, 600);
+
+  ctx.fillStyle = "#00ff00";
+  ctx.font = "50px radioactive";
+  ctx.textAlign = "center";
+
+  ctx.fillText("Welcome to Atomic Warriors", 500, 100);
+  ctx.fillText("Press Enter to Start", 500, 200);
+  debugger
+  key("return", () =>  new Match(bgMusic).start());
 });

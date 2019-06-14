@@ -3,6 +3,9 @@
     src: url(./monofonto-webfont.ttf);
 }
 
+*{
+    font-family: radioactive;   
+}
 body{
       font-family: radioactive;
       font-size: 18px;

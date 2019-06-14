@@ -4,12 +4,16 @@ import Stage from "./stage";
 import Sound from "./sound";
 
 class Match{
-    constructor(){
+    constructor(bgMusic){
         this.score = [0, 0];
         this.endMatch = false;
         this.matchWinner = "";
-        this.bgMusic = new Sound("/Users/mukkan/Desktop/Javascript Games/atomic-warriors/assets/bgmusic.mp3");
-        this.deathSound = new Sound("./assets/deathSound.mp3");
+        this.bgMusic = bgMusic;
+        this.bgMusic.addEventListener("canplaythrough", () => {
+            // debugger
+            this.bgMusic.play();
+        });
+        // this.deathSound = new Sound("./assets/deathSound.mp3");
     }
 
     addScore(warrior){
@@ -33,8 +37,7 @@ class Match{
         const game = new Game(this);
         const stage = new Stage();
         new GameView(this, game, ctx, stage).start();
-        // debugger
-        this.bgMusic.sound.addEventListener("load", this.bgMusic.play());
+        this.bgMusic.play();    
     }
 
 
