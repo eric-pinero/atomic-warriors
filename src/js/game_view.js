@@ -1,9 +1,11 @@
 class GameView {
-    constructor(game, ctx) {
+    constructor(match, game, ctx, stage) {
       this.ctx = ctx;
       this.game = game;
-      this.warrior1 = this.game.addWarrior([100,70], "#ff00ff", "#00ff00", "right", 1);
-      this.warrior2 = this.game.addWarrior([400,70], "#ffff00", "#00ff00", "left", 2);
+      this.match = match;
+      this.stage = stage;
+      this.warrior1 = this.game.addWarrior([105,70], "#ff00ff", "#00ff00", "right", 1, "Brutalax");
+      this.warrior2 = this.game.addWarrior([865,70], "#ffff00", "#00ff00", "left", 2, "Decrapitator");
     }
   
     bindKeyHandlers() {
@@ -30,14 +32,33 @@ class GameView {
     }
   
     animate(time) {
-      const timeDelta = time - this.lastTime;
   
-    //   this.game.step(timeDelta);
       this.game.draw(this.ctx);
+      this.stage.draw(this.ctx);
       this.lastTime = time;
   
       // every call to animate requests causes another call to animate
-      requestAnimationFrame(this.animate.bind(this));
+      if (!this.match.endMatch){
+        requestAnimationFrame(this.animate.bind(this));
+      } else {
+        this.gameOverScreen(this.match.matchWinner);
+      }
+    }
+
+    gameOverScreen(winner){
+      const ctx = this.ctx;
+      ctx.clearRect(0, 0, 1000, 600);
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(0, 0, 1000, 600);
+  
+      ctx.fillStyle = "#00ff00";
+      ctx.shadowColor = winner.color;
+      ctx.shadowBlur = 20;
+      ctx.font = "50px radioactive";
+      ctx.textAlign = "center"
+      ctx.fillText(`${winner.name} wins!`, 500, 100);
+      ctx.fillText(`Would you like to play again?`, 500, 200);
+  
     }
   }
   
@@ -46,14 +67,14 @@ class GameView {
     a: "left",
     s: "down",
     d: "right",
-    z: "jump",
+    f: "jump",
   };
   GameView.MOVES2 = {
     i: "up",
     j: "left",
     k: "down",
     l: "right",
-    b: "jump",
+    h: "jump",
   };
   
   

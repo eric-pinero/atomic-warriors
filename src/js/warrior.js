@@ -1,9 +1,7 @@
-import {randomColor} from './utils';
-
 class Warrior{
     constructor(options){
         this.player = options.player;
-
+        this.name = options.name;
         this.height = 80;
         this.width = 40;
 
@@ -16,11 +14,10 @@ class Warrior{
         this.shieldColor = options.shieldColor;
         this.glowFactor = 10;
 
-        this.warriorFacing = options.facing;
+        this.facing = options.facing;
         this.dy = 0;
         this.dx = 0;
         this.destroyed = false;
-        this.attack = false;
 
         this.winner = false;
         
@@ -58,26 +55,16 @@ class Warrior{
         }
 
 
-        // if (command && command !== "jump"){
-        //     this.warriorPos[0] += command[0];
-        //     this.warriorPos[1] += command[1];
-        // } else if (command === "jump" && this.warriorPos[1] === 461){
-        //     this.dy -= 20;
-        // }
-
     }
 
     update(){
-        if (this.destroyed){
-            this.loser = true;
-        }
         if (this.warriorPos[1] + this.dy > 460){
             this.dy = 0;
         } else {
             this.dy += 1;
         }
         
-        if (this.warriorPos[0] + this.dx < 99 || this.warriorPos[0] + this.dx > 900){
+        if (this.warriorPos[0] + this.dx < 99 || this.warriorPos[0] + this.dx > 865){
             this.dx = 0;
         }else if (this.dx > 9){
             this.dx = 9;

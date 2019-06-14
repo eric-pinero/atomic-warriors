@@ -1,14 +1,27 @@
 import Game from "./game";
 import GameView from "./game_view";
+import Stage from "./stage";
+import Sound from "./sound";
 
 class Match{
     constructor(){
         this.score = [0, 0];
+        this.endMatch = false;
+        this.matchWinner = "";
+        this.bgMusic = new Sound("/Users/mukkan/Desktop/Javascript Games/atomic-warriors/assets/bgmusic.mp3");
+        this.deathSound = new Sound("./assets/deathSound.mp3");
     }
 
-    addScore(player){
-        this.score[player - 1]++;
-        this.start();
+    addScore(warrior){
+        this.score[warrior.player - 1]++;
+        if (this.score[warrior.player - 1] === 3){
+            this.matchOver(warrior);
+        }
+    }
+
+    matchOver(winner){
+        this.endMatch = true;
+        this.matchWinner = winner;
     }
 
     start(){
@@ -18,7 +31,10 @@ class Match{
       
         const ctx = canvasEl.getContext("2d");
         const game = new Game(this);
-        new GameView(game, ctx).start();
+        const stage = new Stage();
+        new GameView(this, game, ctx, stage).start();
+        // debugger
+        this.bgMusic.sound.addEventListener("load", this.bgMusic.play());
     }
 
 

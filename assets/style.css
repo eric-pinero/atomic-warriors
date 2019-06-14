@@ -1,0 +1,56 @@
+@font-face {
+    font-family: radioactive;
+    src: url(./monofonto-webfont.ttf);
+}
+
+body{
+      font-family: radioactive;
+      font-size: 18px;
+      color: #00ff00;
+      background-color: black;
+}
+
+header{
+    text-align: center;
+    font-size: 50px;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    font-family: radioactive;
+}
+
+canvas{
+    border: 1px solid #00ff00;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+footer > h2{
+    margin: 15px 0;
+}
+
+.right-margin{
+    margin-right: 10px;
+}
+.left-margin{
+    margin-left: 10px;
+}
