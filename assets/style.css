@@ -6,6 +6,11 @@
 *{
     font-family: radioactive;   
 }
+
+.hidden{
+    display: none;
+}
+
 body{
       font-family: radioactive;
       font-size: 18px;
@@ -14,8 +19,21 @@ body{
 }
 
 header{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.title{
     font-size: 50px;
+}   
+
+.mute-bar {
+    height: 18px;
+    width: 1000px;
+    text-align: right;
 }
 
 main {
@@ -23,6 +41,10 @@ main {
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+header > span{
+    display: inline;
 }
 
 
@@ -54,6 +76,10 @@ footer > h2{
 .right-margin{
     margin-right: 10px;
 }
+
+.mute-instruction{
+}
+
 .left-margin{
     margin-left: 10px;
 }

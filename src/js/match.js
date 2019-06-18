@@ -4,15 +4,16 @@ import Stage from "./stage";
 import Sound from "./sound";
 
 class Match{
-    constructor(bgMusic){
+    constructor(sounds){
         this.score = [0, 0];
         this.endMatch = false;
         this.matchWinner = "";
-        this.bgMusic = bgMusic;
-        this.bgMusic.addEventListener("canplaythrough", () => {
+        this.bgMusic = sounds[0];
+        debugger
+        this.bgMusic.sound.addEventListener("canplaythrough", () => {
             this.bgMusic.play();
         });
-        this.deathSound = new Sound("./assets/deathSound.mp3");
+        this.deathSound = sounds[1];
     }
 
     addScore(warrior){

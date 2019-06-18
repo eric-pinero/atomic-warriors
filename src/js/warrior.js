@@ -20,6 +20,7 @@ class Warrior{
         this.destroyed = false;
 
         this.winner = false;
+        this.i = 0;
         
     }
 
@@ -114,6 +115,7 @@ class Warrior{
 
         this.shieldPos[1] += this.dy;
         this.shieldPos[0] += this.dx;
+
     }
 
     draw(ctx) {

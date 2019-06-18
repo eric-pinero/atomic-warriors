@@ -10,11 +10,19 @@
   </head>
   <body>
     <header>
-      AT<img height="40" width="40" src="./assets/radioactive-o.png">MIC 
-      WARRI<img height="40" width="40" src="./assets/radioactive-o.png">RS
+      <div class="title">      
+        AT<img height="40" width="40" src="./assets/radioactive-o.png">MIC 
+        WARRI<img height="40" width="40" src="./assets/radioactive-o.png">RS
+      </div>
+      <div class="mute-bar">
+          <span id="mute-button" class="hidden">  Muted</span>
+      </div>
+
     </header>
     <main>
-      <ul class="right-margin">
+      <div class="left-side">
+      <p class="right-margin">Press "M" to mute</p>
+      <ul>
         <li>
           W: Raise Shield
         </li>
@@ -30,6 +38,7 @@
         <li>
           F: Jump
         </li>
+      </div>
 
       </ul>
       <canvas></canvas>
@@ -51,9 +60,9 @@
           </li>
         </ul>
     </main>
-    <footer>
+    <!-- <footer>
       <h2>Jump on your opponent and crush them! Incinerate them with your radioactive shield!</h2>
       <h2>Do whatever it takes to win 3 times and become the true ATOMIC WARRIOR!!!</h2>
-      </footer>
+      </footer> -->
   </body>
 </html>

@@ -60,7 +60,6 @@ class Game {
     ctx.fillText(`${this.warriors[0].name}: ${this.match.score[0]}`, 80, 25);
     ctx.fillStyle = this.warriors[1].color;
     ctx.fillText(`${this.warriors[1].name}: ${this.match.score[1]}`, 690, 25);
-
     this.checkCollisions();
     this.allObjects().forEach((object) => {
         object.update();
@@ -100,27 +99,11 @@ class Game {
       warrior.winner = false;
       warrior.destroyed = false;
       warrior.dx = 0;
+      warrior.dy = 0;
     }
     
   }
 
-  isOutOfBounds(pos) {
-    return (pos[0] < 0) || (pos[1] < 0) ||
-      (pos[0] > Game.DIM_X) || (pos[1] > Game.DIM_Y);
-  }
-
-  moveObjects(delta) {
-    this.allObjects().forEach((object) => {
-      object.move(delta);
-    });
-  }
-
-  randomPosition() {
-    return [
-      Game.DIM_X * Math.random(),
-      Game.DIM_Y * Math.random()
-    ];
-  }
 
 }
 
