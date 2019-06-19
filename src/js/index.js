@@ -3,7 +3,7 @@ import Sound from "./sound";
 
 document.addEventListener("DOMContentLoaded", () => {
   const bgMusic = new Sound("assets/bgmusic.mp3");
-  const deathSound = new Sound("assets/deathsound.mp3");
+  const deathSound = new Sound("assets/deathSound.mp3");
   const sounds = [bgMusic, deathSound];
 
   const canvasEl = document.getElementsByTagName("canvas")[0];
