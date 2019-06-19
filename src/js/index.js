@@ -2,8 +2,8 @@ import Match from "./match";
 import Sound from "./sound";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const bgMusic = new Sound("./assets/bgMusic.mp3");
-  const deathSound = new Sound("./assets/deathSound.mp3");
+  const bgMusic = new Sound("assets/bgMusic.mp3");
+  const deathSound = new Sound("assets/deathSound.mp3");
   const sounds = [bgMusic, deathSound];
 
 
