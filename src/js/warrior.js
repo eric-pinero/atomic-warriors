@@ -20,8 +20,7 @@ class Warrior{
         this.destroyed = false;
 
         this.winner = false;
-        this.i = 0;
-        
+        this.i = 0;   
     }
 
     move(command){
@@ -54,8 +53,6 @@ class Warrior{
             default:
                 break;
         }
-
-
     }
 
     update(){

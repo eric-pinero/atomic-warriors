@@ -3,9 +3,6 @@ import Sound from "./sound";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  const bgMusic = new Sound("./assets/bgMusic.mp3");
-  const deathSound = new Sound("./assets/deathSound.mp3");
-  const sounds = [bgMusic, deathSound];
 
   const canvasEl = document.getElementsByTagName("canvas")[0];
   canvasEl.width = 1000;
@@ -31,5 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   ctx.fillText("Press Enter to Fight", 500, 325);
 
-  key("return", () =>  new Match(sounds).start());
+  const match = new Match(ctx);
+  key("return", () => {
+    const bgMusic = new Sound("./assets/bgMusic.mp3");
+    const deathSound = new Sound("./assets/deathSound.mp3");
+    const sounds = [bgMusic, deathSound];
+    match.start(sounds);}
+  );
 });

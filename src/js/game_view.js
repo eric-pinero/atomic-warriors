@@ -48,22 +48,17 @@ class GameView {
   }
 
   animate(time) {
-    this.game.draw(this.ctx);
-    this.stage.draw(this.ctx);
+    if (this.match.endMatch){
+      this.gameOverScreen(this.match.matchWinner);
+    }else{
+      this.game.draw(this.ctx);
+      this.stage.draw(this.ctx);
+    }
     this.lastTime = time;
 
-    if (this.muted){
-      
-    } else {
-
-    }
-
     // every call to animate requests causes another call to animate
-    if (!this.match.endMatch){
       requestAnimationFrame(this.animate.bind(this));
-    } else {
-      this.gameOverScreen(this.match.matchWinner);
-    }
+    
   }
 
   gameOverScreen(winner){

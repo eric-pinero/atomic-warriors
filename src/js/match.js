@@ -1,19 +1,15 @@
 import Game from "./game";
 import GameView from "./game_view";
 import Stage from "./stage";
-import Sound from "./sound";
 
 class Match{
-    constructor(sounds){
+    constructor(ctx){
+        this.ctx = ctx;
         this.score = [0, 0];
+        this.startMatch = false;
         this.endMatch = false;
         this.matchWinner = "";
-        this.bgMusic = sounds[0];
-        debugger
-        this.bgMusic.sound.addEventListener("canplaythrough", () => {
-            this.bgMusic.play();
-        });
-        this.deathSound = sounds[1];
+        this.deathSound = "";
     }
 
     addScore(warrior){
@@ -28,20 +24,22 @@ class Match{
         this.matchWinner = winner;
     }
 
-    start(){
-        const canvasEl = document.getElementsByTagName("canvas")[0];
-        canvasEl.width = Game.DIM_X;
-        canvasEl.height = Game.DIM_Y;
-      
-        const ctx = canvasEl.getContext("2d");
-        const game = new Game(this);
-        const stage = new Stage();
-        new GameView(this, game, ctx, stage).start();
-        this.bgMusic.play();    
+    start(sounds){
+        if (!this.startMatch){
+            const game = new Game(this);
+            const stage = new Stage();
+            new GameView(this, game, this.ctx, stage).start();
+            this.startMatch = true;
+            sounds[0].play();
+        }
+        else if (this.endMatch){
+            this.score = [0,0];
+            this.matchWinner = "";
+            this.endMatch = false;
+            sounds[0].play();
+        }
+        this.deathSound = sounds[1];
     }
-
-
-
 }
 
 export default Match;

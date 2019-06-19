@@ -57,9 +57,9 @@ class Game {
 
     ctx.fillStyle = this.warriors[0].color;
     ctx.font = "30px radioactive";
-    ctx.fillText(`${this.warriors[0].name}: ${this.match.score[0]}`, 80, 25);
+    ctx.fillText(`${this.warriors[0].name}: ${this.match.score[0]}`, 165, 25);
     ctx.fillStyle = this.warriors[1].color;
-    ctx.fillText(`${this.warriors[1].name}: ${this.match.score[1]}`, 690, 25);
+    ctx.fillText(`${this.warriors[1].name}: ${this.match.score[1]}`, 805, 25);
     this.checkCollisions();
     this.allObjects().forEach((object) => {
         object.update();
