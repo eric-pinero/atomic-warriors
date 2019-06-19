@@ -36,7 +36,6 @@ class GameView {
 
   muteUnmute() {
     document.querySelectorAll("video, audio").forEach( ele => this.muteUnmuteEle(ele));
-    debugger
     document.getElementById("mute-button").classList.toggle("hidden");
   }
   
