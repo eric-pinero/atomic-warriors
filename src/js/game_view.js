@@ -5,7 +5,7 @@ class GameView {
     this.match = match;
     this.stage = stage;
     this.warrior1 = this.game.addWarrior([105,70], "#ff00ff", "#00ff00", "right", 1, "Brutalax");
-    this.warrior2 = this.game.addWarrior([865,70], "#ffff00", "#00ff00", "left", 2, "Decrapitator");
+    this.warrior2 = this.game.addWarrior([865,70], "#ffff00", "#00ff00", "left", 2, "Evisceratrix");
   }
 
   bindKeyHandlers() {

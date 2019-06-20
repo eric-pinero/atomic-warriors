@@ -154,30 +154,6 @@ class Warrior{
             width: otherObject.shieldWidth,
             height: otherObject.shieldHeight,
         };
-
-        
-        
-        // const shieldClash = 
-        //     (
-        //         (this.shieldPos[0] + this.shieldWidth > otherObject.shieldPos[0] &&
-        //         this.shieldPos[0] + this.shieldWidth < otherObject.shieldPos[0] + otherObject.shieldWidth)
-        //         ||
-        //         (this.shieldPos[0] < otherObject.shieldPos[0] + otherObject.shieldWidth &&
-        //         this.shieldPos[0] > otherObject.shieldPos[0]
-        //     )
-
-        //     &&
-        //     (
-        //         (this.shieldPos[1] + this.shieldHeight > otherObject.shieldPos[1] &&
-        //         this.shieldPos[1] + this.shieldHeight < otherObject.shieldPos[1] + otherObject.shieldHeight)
-        //         ||
-        //         (this.shieldPos[1] < otherObject.shieldPos[1] + otherObject.height &&
-        //         this.shieldPos[1] > otherObject.shieldPos[1])
-        //     )
-        // )
-        // ;
-
-
         const shieldClash =
             (shieldHitbox.x < otherShieldHitbox.x + otherShieldHitbox.width &&
             shieldHitbox.x + shieldHitbox.width > otherShieldHitbox.x &&
@@ -191,15 +167,6 @@ class Warrior{
             warriorHitbox.y < otherShieldHitbox.y + otherShieldHitbox.height &&
             warriorHitbox.y + warriorHitbox.height > otherShieldHitbox.y)
         ;
-
-        // const hitbyShield =
-        // (warriorHitbox.x + warriorHitbox.width === otherShieldHitbox.x &&
-        //     warriorHitbox.x + warriorHitbox.width < otherShieldHitbox.x + otherShieldHitbox.width &&
-        //     warriorHitbox.y < otherShieldHitbox.y &&
-        //     warriorHitbox.y + warriorHitbox.height >= otherShieldHitbox.y + otherShieldHitbox.height)
-        // ;
-
-        // const simulHit = (hitbyShield && hitwithShield);
 
         const warriorClash = 
             (warriorHitbox.x < otherWarriorHitbox.x + otherWarriorHitbox.width &&
