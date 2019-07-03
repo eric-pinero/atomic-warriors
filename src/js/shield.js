@@ -79,10 +79,6 @@ class Shield{
         ctx.fillStyle = this.color;
         ctx.fillRect(this.pos[0], this.pos[1], this.width, this.height);
     }
-    
-    //   isCollidedWith(otherObject) {
-    //     const centerDist = Util.dist(this.pos, otherObject.pos);
-    //     return centerDist < (this.radius + otherObject.radius);
 }    
 
 export default Shield;

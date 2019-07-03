@@ -30,13 +30,11 @@ class Match{
             const stage = new Stage();
             new GameView(this, game, this.ctx, stage).start();
             this.startMatch = true;
-            // sounds[0].play();
         }
         else if (this.endMatch){
             this.score = [0,0];
             this.matchWinner = "";
             this.endMatch = false;
-            // sounds[0].play();
         }
         this.deathSound = sounds[1];
     }

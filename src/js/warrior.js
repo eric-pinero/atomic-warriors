@@ -178,10 +178,6 @@ class Warrior{
         switch (true) {
             case shieldClash:
                 return "shieldClash";
-            // case simulHit:
-            //     return "simulHit";
-            // case hitbyShield :
-            //     return "hitbyShield";
             case hitwithShield :
                 return "hitwithShield";
             case warriorClash:
@@ -197,21 +193,12 @@ class Warrior{
             switch (true) {
                 case collisionType === "shieldClash":
                     this.dx = -this.dx;
-                    // otherObject.dx = -otherObject.dx;
                     this.dy = -this.dy;
-                    // otherObject.dy = -otherObject.dy;
                     break;
-                // case collisionType === "simulHit":
-                //     this.destroyWarrior();
-                //     otherObject.destroyWarrior();
-                //     break;
                 case collisionType === "hitwithShield":
                     this.destroyWarrior();
                     otherObject.winner = true;
                     break;
-                // case collisionType === "hitbyShield":
-                //     otherObject.destroyWarrior();
-                //     break;
                 case collisionType === "warriorClash" && this.dy > 0:
                     otherObject.destroyWarrior();
                     this.winner = true;
