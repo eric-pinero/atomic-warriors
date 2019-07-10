@@ -26,7 +26,39 @@ My goal in creating this project is to create modern slice of my favorite parts 
 + Spacebar pauses/plays and M mute/unmutes sound
 
 
-https://github.com/eric-pinero/eric-pinero.github.io/blob/6914c3233d0ac2dcf425f04dfa73564a66ff32de/src/js/warrior.js#L26-L56
+```javascript
+    move(command){
+
+        switch (command) {
+            case "left":
+                    this.dx -= 3;
+                break;
+            case "right":
+                    this.dx += 3;
+                break;
+            case "jump":
+                if (this.warriorPos[1] === 461)
+                this.dy -= 20;
+                break;
+            case "up":
+                if (this.shieldStance === "low"){
+                    this.shieldStance = "middle";
+                } else if(this.shieldStance === "middle") {
+                    this.shieldStance = "top";
+                }
+                break;
+            case "down":
+                if (this.shieldStance === "middle"){
+                    this.shieldStance = "low";
+                } else if(this.shieldStance === "top") {
+                    this.shieldStance = "middle";
+                }
+                break;
+            default:
+                break;
+        }
+    }
+```
 
 ### Implementation
 * Tuesday - Skeleton of character movement is completed
@@ -40,3 +72,6 @@ https://github.com/eric-pinero/eric-pinero.github.io/blob/6914c3233d0ac2dcf425f0
 * Choice of character color
 * Shields can be thrown and regenerate appropriately
 * AI added
+
+
+
